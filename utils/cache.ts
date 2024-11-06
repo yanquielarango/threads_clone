@@ -7,7 +7,7 @@ export interface TokenCache {
     clearToken?: (key: string) => void
 }
 
-const tokenCache = (): TokenCache => {
+const createTokenCache = (): TokenCache => {
     return {
          getToken: async(key: string) => {
             try {
@@ -35,4 +35,4 @@ const tokenCache = (): TokenCache => {
 }
 
 
-export default tokenCache = Platform.OS === 'web' ? undefined : tokenCache;
+export const tokenCache = Platform.OS === 'web' ? undefined : createTokenCache();
