@@ -1,10 +1,32 @@
-import { Stack} from "expo-router";
+import { Stack , Slot} from "expo-router";
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
 
 
-export default function RootLayout() {
+
+
+
+const InitialLayout = () => {
+    return (
+        <Stack>
+            <Stack.Screen name="index"/>
+        </Stack>
+    )
+}
+
+
+
+ export default function RootLayout() {
   return (
-      <Stack>
-        <Stack.Screen name="index"/>
-      </Stack>
+     <ClerkProvider publishableKey={publishableKey}>
+         <ClerkLoaded>
+             <InitialLayout/>
+         </ClerkLoaded>
+     </ClerkProvider>
   )
 }
+
+
+
+
